@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <div class="logo">&#10022; Grand Azure Hotel</div>
+            <p class="tagline">Where comfort meets elegance</p>
+        </header>
+
+        <main>
+            {% if success %}
+            <div class="success-box">
+                <h2>&#10003; Booking Confirmed!</h2>
+                <p>Thank you, <strong>{{ name }}</strong>. Your room has been reserved!</p>
+                <a href="/" class="btn-back">Make Another Booking</a>
+            </div>
+            {% else %}
+            <div class="form-card">
+                <h1>Reserve Your Room</h1>
+                <p class="subtitle">Fill in your details below to complete your booking</p>
+
+                <form action="/book" method="POST">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="full_name">Full Name</label>
+                            <input type="text" id="full_name" name="full_name" placeholder="John Doe" required />
+                        </div>
+                        <div class="field">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                        </div>
+                        <div class="field">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+92 300 1234567" required />
+                        </div>
+                        <div class="field">
+                            <label for="room_type">Room Type</label>
+                            <select id="room_type" name="room_type" required>
+                                <option value="" disabled selected>Select a room</option>
+                                <option value="Standard">Standard Room</option>
+                                <option value="Deluxe">Deluxe Room</option>
+                                <option value="Suite">Suite</option>
+                                <option value="Presidential">Presidential Suite</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="check_in">Check-In Date</label>
+                            <input type="date" id="check_in" name="check_in" required />
+                        </div>
+                        <div class="field">
+                            <label for="check_out">Check-Out Date</label>
+                            <input type="date" id="check_out" name="check_out" required />
+                        </div>
+                        <div class="field">
+                            <label for="guests">Number of Guests</label>
+                            <input type="number" id="guests" name="guests" min="1" max="10" placeholder="2" required />
+                        </div>
+                    </div>
+
+                    <div class="field full-width">
+                        <label for="special_requests">Special Requests (Optional)</label>
+                        <textarea id="special_requests" name="special_requests" rows="3"
+                            placeholder="e.g. late check-in, extra pillows..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirm Booking &rarr;</button>
+                </form>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Grand Azure Hotel. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
